@@ -1,0 +1,11 @@
+---
+import type { Lang } from '../../i18n';
+interface Props { lang: Lang; href: string | null; }
+const { lang, href } = Astro.props;
+---
+
+{href && (
+  <a class="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1.5 text-sm font-medium transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]" href={href} hreflang={lang === 'en' ? 'zh-TW' : 'en'}>
+    <span aria-hidden="true">↗</span>{lang === 'en' ? '閱讀中文版' : 'Read in English'}
+  </a>
+)}

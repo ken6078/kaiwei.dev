@@ -1,0 +1,11 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PostCard from '../../components/blog/PostCard.astro';
+import { getDictionary } from '../../i18n';
+import { getPosts } from '../../utils/posts';
+const t = getDictionary('en');
+const posts = await getPosts('en');
+---
+<PageLayout lang="en" title={t.blog.title} description={t.blog.description} canonicalPath="/blog/">
+  <div>{posts.length ? posts.map((post) => <PostCard post={post} lang="en" />) : <p>{t.blog.empty}</p>}</div>
+</PageLayout>

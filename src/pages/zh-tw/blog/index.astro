@@ -1,0 +1,11 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import PostCard from '../../../components/blog/PostCard.astro';
+import { getDictionary } from '../../../i18n';
+import { getPosts } from '../../../utils/posts';
+const t = getDictionary('zh-TW');
+const posts = await getPosts('zh-TW');
+---
+<PageLayout lang="zh-TW" title={t.blog.title} description={t.blog.description} canonicalPath="/zh-tw/blog/">
+  <div>{posts.length ? posts.map((post) => <PostCard post={post} lang="zh-TW" />) : <p>{t.blog.empty}</p>}</div>
+</PageLayout>

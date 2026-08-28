@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0b0b0e" />
+  <circle cx="1010" cy="80" r="330" fill="#312e81" opacity=".55" />
+  <path d="M80 92h1040" stroke="#292931" />
+  <text
+    x="80"
+    y="300"
+    fill="#f4f4f5"
+    font-family="Huninn, sans-serif"
+    font-size="84"
+    font-weight="700"
+    letter-spacing="-4"
+  >
+    Kai-Wei Chou
+  </text>
+  <text x="84" y="372" fill="#a1a1aa" font-family="Huninn, sans-serif" font-size="29">
+    SOFTWARE ENGINEER · OPEN SOURCE · SYSTEMS · AI
+  </text>
+  <text
+    x="84"
+    y="540"
+    fill="#8b8cf8"
+    font-family="Huninn, sans-serif"
+    font-size="25"
+  >kaiwei.dev</text>
+</svg>

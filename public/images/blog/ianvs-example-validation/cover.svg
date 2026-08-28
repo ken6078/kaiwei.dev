@@ -1,0 +1,78 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1600"
+  height="1000"
+  viewBox="0 0 1600 1000"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">Ianvs example validation workflow</title>
+  <desc id="desc">PR or schedule, inventory, validation, regression, and report.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#202028" stroke-width="1" />
+    </pattern>
+    <marker
+      id="arrow"
+      viewBox="0 0 10 10"
+      refX="9"
+      refY="5"
+      markerWidth="8"
+      markerHeight="8"
+      orient="auto"
+    >
+      <path d="M0 0 10 5 0 10Z" fill="#71717a" />
+    </marker>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#0b0b0e" />
+  <rect width="1600" height="1000" fill="url(#grid)" opacity=".55" />
+
+  <g font-family="Huninn, sans-serif">
+    <text x="100" y="220" fill="#a5b4fc" font-size="22" letter-spacing="4">
+      KUBEEDGE · IANVS
+    </text>
+    <text x="100" y="300" fill="#f4f4f5" font-size="60" font-weight="700">
+      Example Validation CI/CD
+    </text>
+  </g>
+
+  <g fill="none" stroke="#71717a" stroke-width="4" marker-end="url(#arrow)">
+    <path d="M330 590H385" />
+    <path d="M640 590H695" />
+    <path d="M950 590H1005" />
+    <path d="M1260 590H1315" />
+  </g>
+
+  <g fill="#111116" stroke="#3f3f4b" stroke-width="3">
+    <rect x="70" y="470" width="260" height="240" rx="16" />
+    <rect x="380" y="470" width="260" height="240" rx="16" />
+    <rect x="690" y="470" width="260" height="240" rx="16" stroke="#6366f1" />
+    <rect x="1000" y="470" width="260" height="240" rx="16" />
+    <rect x="1310" y="470" width="220" height="240" rx="16" />
+  </g>
+
+  <g font-family="Huninn, sans-serif" text-anchor="middle">
+    <text x="200" y="548" fill="#a5b4fc" font-size="18" letter-spacing="2">01</text>
+    <text x="200" y="625" fill="#f4f4f5" font-size="31" font-weight="700">PR / Schedule</text>
+
+    <text x="510" y="548" fill="#a5b4fc" font-size="18" letter-spacing="2">02</text>
+    <text x="510" y="625" fill="#f4f4f5" font-size="31" font-weight="700">Inventory</text>
+
+    <text x="820" y="548" fill="#a5b4fc" font-size="18" letter-spacing="2">03</text>
+    <text x="820" y="625" fill="#f4f4f5" font-size="31" font-weight="700">Validation</text>
+
+    <text x="1130" y="548" fill="#a5b4fc" font-size="18" letter-spacing="2">04</text>
+    <text x="1130" y="625" fill="#f4f4f5" font-size="31" font-weight="700">Regression</text>
+
+    <text x="1420" y="548" fill="#a5b4fc" font-size="18" letter-spacing="2">05</text>
+    <text x="1420" y="625" fill="#f4f4f5" font-size="31" font-weight="700">Report</text>
+  </g>
+
+  <g fill="#818cf8">
+    <circle cx="357" cy="590" r="6" />
+    <circle cx="667" cy="590" r="6" />
+    <circle cx="977" cy="590" r="6" />
+    <circle cx="1287" cy="590" r="6" />
+  </g>
+</svg>

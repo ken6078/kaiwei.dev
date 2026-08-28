@@ -1,0 +1,17 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import PostCard from '../../../components/blog/PostCard.astro';
+import { getDictionary, tagLabel } from '../../../i18n';
+import { getPosts } from '../../../utils/posts';
+export async function getStaticPaths() {
+  const posts = await getPosts('zh-TW');
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+  return tags.map((tag) => ({ params: { tag }, props: { tag, posts: posts.filter((post) => post.data.tags.includes(tag)) } }));
+}
+const { tag, posts } = Astro.props;
+const t = getDictionary('zh-TW');
+const title = `${t.tags.tagged}：${tagLabel(tag, 'zh-TW')}`;
+---
+<PageLayout lang="zh-TW" title={title} description={`${tagLabel(tag, 'zh-TW')}，共 ${posts.length} ${t.tags.posts}。`} canonicalPath={`/zh-tw/tags/${tag}/`}>
+  <div>{posts.map((post) => <PostCard post={post} lang="zh-TW" />)}</div>
+</PageLayout>

@@ -1,0 +1,16 @@
+---
+import { render } from 'astro:content';
+import BlogPostLayout from '../../../layouts/BlogPostLayout.astro';
+import { entrySlug, getPosts } from '../../../utils/posts';
+import { findTranslation } from '../../../utils/translations';
+
+export async function getStaticPaths() {
+  const posts = await getPosts('zh-TW');
+  return posts.map((post) => ({ params: { slug: entrySlug(post) }, props: { post } }));
+}
+const { post } = Astro.props;
+const allPosts = [...await getPosts('en'), ...await getPosts('zh-TW')];
+const translation = findTranslation(post, allPosts);
+const { Content, headings } = await render(post);
+---
+<BlogPostLayout post={post} headings={headings} translation={translation}><Content /></BlogPostLayout>

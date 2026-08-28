@@ -1,0 +1,9 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import ProjectGrid from '../../../components/projects/ProjectGrid.astro';
+import { getDictionary } from '../../../i18n';
+import { getProjects } from '../../../utils/posts';
+const t = getDictionary('zh-TW');
+const projects = await getProjects('zh-TW');
+---
+<PageLayout lang="zh-TW" title={t.projects.title} description={t.projects.description} canonicalPath="/zh-tw/projects/"><ProjectGrid projects={projects} lang="zh-TW" /></PageLayout>

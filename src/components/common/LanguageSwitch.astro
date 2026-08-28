@@ -1,0 +1,14 @@
+---
+import type { Lang } from '../../i18n';
+import { getDictionary } from '../../i18n';
+
+interface Props { lang: Lang; href: string | null; }
+const { lang, href } = Astro.props;
+const t = getDictionary(lang);
+---
+
+{href && (
+  <a class="focus-ring text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--text)]" href={href} hreflang={lang === 'en' ? 'zh-TW' : 'en'}>
+    {t.nav.language}
+  </a>
+)}

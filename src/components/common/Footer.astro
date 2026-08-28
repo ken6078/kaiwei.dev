@@ -1,0 +1,20 @@
+---
+import type { Lang } from '../../i18n';
+import { getDictionary } from '../../i18n';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = getDictionary(lang);
+const year = new Date().getUTCFullYear();
+---
+
+<footer class="mt-24 border-t border-[var(--border)]">
+  <div class="container-site flex flex-col gap-4 py-10 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
+    <p>© {year} Kai-Wei Chou</p>
+    <p>{t.footer.note}</p>
+    <div class="flex gap-4">
+      <a class="focus-ring hover:text-[var(--text)]" href="https://github.com/ken6078" rel="me noopener noreferrer">GitHub</a>
+      <a class="focus-ring hover:text-[var(--text)]" href="https://www.linkedin.com/in/kaiweichou/" rel="me noopener noreferrer">LinkedIn</a>
+      <a class="focus-ring hover:text-[var(--text)]" href={lang === 'en' ? '/rss.xml' : '/zh-tw/rss.xml'}>RSS</a>
+    </div>
+  </div>
+</footer>

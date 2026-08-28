@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/home/Hero.astro';
+import FeaturedProjects from '../../components/home/FeaturedProjects.astro';
+import LatestPosts from '../../components/home/LatestPosts.astro';
+import AboutPreview from '../../components/home/AboutPreview.astro';
+import { getPosts, getProjects } from '../../utils/posts';
+const posts = await getPosts('zh-TW');
+const projects = await getProjects('zh-TW');
+const alternates = [{ lang: 'en' as const, href: '/' }, { lang: 'zh-TW' as const, href: '/zh-tw/' }, { lang: 'x-default' as const, href: '/' }];
+---
+
+<BaseLayout lang="zh-TW" title="周楷崴 — 軟體工程師" description="周楷崴是一名軟體工程師，專注於開發者工具、基礎設施、開源與 AI 應用。" canonicalPath="/zh-tw/" languageHref="/" alternates={alternates}>
+  <Hero lang="zh-TW" />
+  <FeaturedProjects projects={projects.filter((project) => project.data.featured).slice(0, 4)} lang="zh-TW" />
+  <LatestPosts posts={posts.slice(0, 3)} lang="zh-TW" />
+  <AboutPreview lang="zh-TW" />
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+import type { MarkdownHeading } from 'astro';
+import type { Lang } from '../../i18n';
+import { getDictionary } from '../../i18n';
+interface Props { headings: MarkdownHeading[]; lang: Lang; }
+const { headings, lang } = Astro.props;
+const t = getDictionary(lang);
+const visible = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+---
+
+{visible.length > 0 && (
+  <aside class="lg:sticky lg:top-24 lg:self-start">
+    <details class="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4 lg:border-0 lg:bg-transparent lg:p-0" open>
+      <summary class="cursor-pointer text-sm font-semibold lg:cursor-default lg:list-none">{t.blog.toc}</summary>
+      <nav class="mt-4" aria-label={t.blog.toc}>
+        <ol class="space-y-2 border-l border-[var(--border)] pl-4 text-sm text-[var(--muted)]">
+          {visible.map((heading) => (
+            <li class:list={[heading.depth === 3 && 'pl-3']}><a class="leading-5 hover:text-[var(--accent)]" href={`#${heading.slug}`}>{heading.text}</a></li>
+          ))}
+        </ol>
+      </nav>
+    </details>
+  </aside>
+)}

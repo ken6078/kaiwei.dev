@@ -1,0 +1,27 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { Lang } from '../i18n';
+import { counterpartPath } from '../utils/translations';
+
+interface Props { lang: Lang; title: string; description: string; canonicalPath: string; }
+const props = Astro.props;
+const counterpart = counterpartPath(props.canonicalPath, props.lang);
+const englishPath = props.lang === 'en' ? props.canonicalPath : counterpart;
+const chinesePath = props.lang === 'zh-TW' ? props.canonicalPath : counterpart;
+const alternates = [
+  { lang: 'en' as const, href: englishPath },
+  { lang: 'zh-TW' as const, href: chinesePath },
+  { lang: 'x-default' as const, href: englishPath },
+];
+---
+
+<BaseLayout {...props} languageHref={counterpart} alternates={alternates}>
+  <section class="container-site py-16 sm:py-24">
+    <header class="max-w-3xl">
+      <p class="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">kaiwei.dev</p>
+      <h1 class="text-4xl font-semibold tracking-[-0.045em] sm:text-6xl">{props.title}</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-8 text-[var(--muted)]">{props.description}</p>
+    </header>
+    <div class="mt-14"><slot /></div>
+  </section>
+</BaseLayout>

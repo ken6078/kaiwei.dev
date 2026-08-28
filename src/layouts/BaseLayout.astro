@@ -1,0 +1,47 @@
+---
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import SEO, { type AlternateLink } from '../components/common/SEO.astro';
+import '../styles/global.css';
+import { getDictionary, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  canonicalPath: string;
+  languageHref?: string | null;
+  alternates?: AlternateLink[];
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  tags?: string[];
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+const props = Astro.props;
+const t = getDictionary(props.lang);
+---
+
+<!doctype html>
+<html lang={props.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0b0e" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" />
+    <link rel="alternate" type="application/rss+xml" title="Kai-Wei Chou" href={props.lang === 'en' ? '/rss.xml' : '/zh-tw/rss.xml'} />
+    <SEO {...props} />
+  </head>
+  <body>
+    <a href="#main" class="focus-ring fixed left-3 top-3 z-[100] -translate-y-20 rounded-md bg-[var(--text)] px-3 py-2 text-sm text-[var(--background)] focus:translate-y-0">{t.a11y.skipToContent}</a>
+    <Header lang={props.lang} languageHref={props.languageHref} />
+    <main id="main"><slot /></main>
+    <Footer lang={props.lang} />
+  </body>
+</html>

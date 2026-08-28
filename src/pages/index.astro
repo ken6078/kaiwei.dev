@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import FeaturedProjects from '../components/home/FeaturedProjects.astro';
+import LatestPosts from '../components/home/LatestPosts.astro';
+import AboutPreview from '../components/home/AboutPreview.astro';
+import { getPosts, getProjects } from '../utils/posts';
+const posts = await getPosts('en');
+const projects = await getProjects('en');
+const alternates = [{ lang: 'en' as const, href: '/' }, { lang: 'zh-TW' as const, href: '/zh-tw/' }, { lang: 'x-default' as const, href: '/' }];
+---
+
+<BaseLayout lang="en" title="Kai-Wei Chou — Software Engineer" description="Kai-Wei Chou is a software engineer working on developer tools, infrastructure, open source, and applied AI." canonicalPath="/" languageHref="/zh-tw/" alternates={alternates}>
+  <Hero lang="en" />
+  <FeaturedProjects projects={projects.filter((project) => project.data.featured).slice(0, 4)} lang="en" />
+  <LatestPosts posts={posts.slice(0, 3)} lang="en" />
+  <AboutPreview lang="en" />
+</BaseLayout>

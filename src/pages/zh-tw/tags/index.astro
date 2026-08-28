@@ -1,0 +1,11 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import { getDictionary, tagLabel } from '../../../i18n';
+import { getPosts, tagPath } from '../../../utils/posts';
+const t = getDictionary('zh-TW');
+const posts = await getPosts('zh-TW');
+const counts = posts.flatMap((post) => post.data.tags).reduce((map, tag) => map.set(tag, (map.get(tag) ?? 0) + 1), new Map<string, number>());
+---
+<PageLayout lang="zh-TW" title={t.tags.title} description={t.tags.description} canonicalPath="/zh-tw/tags/">
+  <div class="flex flex-wrap gap-3">{[...counts.entries()].sort().map(([tag, count]) => <a class="rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm hover:border-[var(--accent)] hover:text-[var(--accent)]" href={tagPath(tag, 'zh-TW')}>{tagLabel(tag, 'zh-TW')} <span class="text-[var(--muted)]">{count}</span></a>)}</div>
+</PageLayout>

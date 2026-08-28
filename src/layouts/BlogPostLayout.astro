@@ -1,0 +1,90 @@
+---
+import type { MarkdownHeading } from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import PostMeta from '../components/blog/PostMeta.astro';
+import TableOfContents from '../components/blog/TableOfContents.astro';
+import TranslationSwitch from '../components/blog/TranslationSwitch.astro';
+import type { BlogPost } from '../utils/posts';
+import { postPath } from '../utils/posts';
+import { getDictionary, tagLabel, type Lang } from '../i18n';
+
+interface Props { post: BlogPost; headings: MarkdownHeading[]; translation?: BlogPost; }
+const { post, headings, translation } = Astro.props;
+const lang = post.data.lang as Lang;
+const t = getDictionary(lang);
+const canonicalPath = postPath(post);
+const translationPath = translation ? postPath(translation) : null;
+const socialImage = post.data.ogImage ?? post.data.cover;
+const englishPath = lang === 'en' ? canonicalPath : translationPath;
+const chinesePath = lang === 'zh-TW' ? canonicalPath : translationPath;
+const alternates = [
+  ...(englishPath ? [{ lang: 'en' as const, href: englishPath }] : []),
+  ...(chinesePath ? [{ lang: 'zh-TW' as const, href: chinesePath }] : []),
+  { lang: 'x-default' as const, href: englishPath ?? canonicalPath },
+];
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.published.toISOString(),
+  dateModified: (post.data.updated ?? post.data.published).toISOString(),
+  inLanguage: lang,
+  mainEntityOfPage: new URL(canonicalPath, Astro.site),
+  author: { '@type': 'Person', name: 'Kai-Wei Chou', url: new URL('/', Astro.site) },
+  keywords: post.data.tags.map((tag) => tagLabel(tag, lang)),
+  ...(socialImage ? { image: new URL(socialImage, Astro.site) } : {}),
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={post.data.title}
+  description={post.data.description}
+  canonicalPath={canonicalPath}
+  languageHref={translationPath}
+  alternates={alternates}
+  image={socialImage}
+  type="article"
+  publishedTime={post.data.published}
+  modifiedTime={post.data.updated ?? post.data.published}
+  tags={post.data.tags}
+  jsonLd={articleJsonLd}
+>
+  <article class="container-site py-14 sm:py-20">
+    <header class="max-w-[720px]">
+      <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">{t.blog.eyebrow}</p>
+      <h1 class="mt-4 text-4xl font-semibold leading-[1.08] tracking-[-0.045em] sm:text-5xl">{post.data.title}</h1>
+      <p class="mt-5 text-lg leading-8 text-[var(--muted)]">{post.data.description}</p>
+      <div class="mt-6"><PostMeta published={post.data.published} updated={post.data.updated} tags={post.data.tags} lang={lang} /></div>
+      {translationPath && <div class="mt-6"><TranslationSwitch lang={lang} href={translationPath} /></div>}
+    </header>
+    {post.data.cover && <img class="mt-10 aspect-[16/10] w-full max-w-[720px] rounded-lg border border-[var(--border)] object-cover" src={post.data.cover} alt="" />}
+    <div class="mt-12 grid gap-10 lg:grid-cols-[minmax(0,720px)_220px] lg:gap-[min(8vw,88px)]">
+      <div class="prose-kaiwei min-w-0"><slot /></div>
+      <TableOfContents headings={headings} lang={lang} />
+    </div>
+  </article>
+  <script>
+    const mermaidBlocks = document.querySelectorAll('pre[data-language="mermaid"]');
+    if (mermaidBlocks.length) {
+      Promise.all([import('mermaid')]).then(([module]) => {
+        const mermaid = module.default;
+        mermaidBlocks.forEach((pre) => {
+          const code = pre.querySelector('code');
+          const wrapper = document.createElement('div');
+          wrapper.className = 'mermaid';
+          wrapper.textContent = code?.textContent ?? '';
+          pre.replaceWith(wrapper);
+        });
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default',
+          securityLevel: 'strict',
+          themeVariables: { fontFamily: 'Huninn, sans-serif' },
+        });
+        mermaid.run({ querySelector: '.mermaid' });
+      });
+    }
+  </script>
+</BaseLayout>

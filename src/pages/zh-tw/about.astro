@@ -1,0 +1,51 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { getDictionary } from '../../i18n';
+const t = getDictionary('zh-TW');
+---
+
+<PageLayout lang="zh-TW" title={t.about.title} description={t.about.description} canonicalPath="/zh-tw/about/">
+  <div class="grid gap-14 lg:grid-cols-[1.2fr_.8fr]">
+    <div class="space-y-12">
+      <section><h2 class="text-xl font-semibold">自我介紹</h2><p class="mt-4 max-w-2xl leading-8 text-[var(--muted)]">我是一名軟體工程師，具備演算法、系統與機器學習的實作經驗。我喜歡把尚未明確定義的問題，整理成實用且容易維護的軟體，特別是能幫助開發者建置、測試與理解複雜系統的工具。</p></section>
+      <section>
+        <h2 class="text-xl font-semibold">經歷</h2>
+        <div class="mt-5 space-y-8">
+          <div class="border-l border-[var(--border)] pl-5">
+            <div class="flex flex-wrap justify-between gap-2">
+              <h3 class="font-semibold">LFX Mentorship Co-Mentor · CNCF / KubeEdge</h3>
+              <span class="font-mono text-xs text-[var(--muted)]">2026.09-2026.11</span>
+            </div>
+            <p class="mt-3 leading-7 text-[var(--muted)]">擔任 <em>Comprehensive Example Restoration for KubeEdge Ianvs: Phase IV</em> co-mentor，協助 mentees 修復與驗證專案範例、改善技術文件，並持續強化 GitHub Actions CI pipeline，使其能因應不同 Python 版本與 upstream 變更。</p>
+            <div class="mt-3 flex flex-wrap gap-4 text-sm font-semibold text-[var(--accent)]">
+              <a href="https://mentorship.lfx.linuxfoundation.org/project/0a346d47-1eff-480c-990d-fa8bf6d9e24a" target="_blank" rel="noopener noreferrer">LFX 專案 ↗</a>
+              <a href="https://github.com/cncf/mentoring/blob/main/programs/lfx-mentorship/2026/03-Sep-Nov/README.md" target="_blank" rel="noopener noreferrer">專案說明 ↗</a>
+            </div>
+          </div>
+          <div class="border-l border-[var(--border)] pl-5">
+            <div class="flex flex-wrap justify-between gap-2">
+              <h3 class="font-semibold">LFX Mentorship Mentee · CNCF / KubeEdge</h3>
+              <span class="font-mono text-xs text-[var(--muted)]">2026.06-2026.08</span>
+            </div>
+            <p class="mt-3 leading-7 text-[var(--muted)]">參與 <em>Comprehensive Example Restoration for Ianvs: Phase III</em>，設計並實作自動化 example validation framework，包含 static checks、smoke tests、分層 CI workflow、regression detection 與狀態報告；同時改善環境設定與貢獻者文件。</p>
+            <div class="mt-3 flex flex-wrap gap-4 text-sm font-semibold text-[var(--accent)]">
+              <a href="https://mentorship.lfx.linuxfoundation.org/project/123576ab-9c3a-4c63-a1b0-4f35c41845f2" target="_blank" rel="noopener noreferrer">LFX 專案 ↗</a>
+              <a href="https://github.com/kubeedge/ianvs/pull/771" target="_blank" rel="noopener noreferrer">主要 PR ↗</a>
+              <a href="/zh-tw/blog/example-validation-ci-cd-experience/">相關文章 →</a>
+            </div>
+          </div>
+          <div class="border-l border-[var(--border)] pl-5">
+            <div class="flex flex-wrap justify-between gap-2">
+              <h3 class="font-semibold">軟體工程實習生 · 威剛科技</h3>
+              <span class="font-mono text-xs text-[var(--muted)]">2024.02-2024.04</span>
+            </div>
+            <p class="mt-3 leading-7 text-[var(--muted)]">使用 pytest 開發 SSD 自動化測試，建置 PXE 作業系統部署環境，並製作 OCR 報告與 WinPE 系統診斷工具；同時協助維護內部 DNS 服務。</p>
+          </div>
+        </div>
+      </section>
+      <section><h2 class="text-xl font-semibold">學歷</h2><div class="mt-5 space-y-6"><div><h3 class="font-semibold">國立臺北科技大學</h3><p class="mt-1 text-[var(--muted)]">資訊工程研究所 · 碩士 · 2025–至今</p></div><div><h3 class="font-semibold">國立宜蘭大學</h3><p class="mt-1 text-[var(--muted)]">資訊工程學系 · 學士 · 2020–2024</p></div></div></section>
+      <section><h2 class="text-xl font-semibold">競賽成績</h2><p class="mt-4 leading-7 text-[var(--muted)]">2023 年大學程式能力檢定（CPE）在超過 2,800 名參與者中排名第 37，位居前 1.3%。</p></section>
+    </div>
+    <aside class="space-y-8"><section><h2 class="text-sm font-semibold uppercase tracking-wider text-[var(--muted)]">技術興趣</h2><ul class="mt-4 space-y-2"><li>開發者工具與基礎設施</li><li>開源軟體</li><li>系統與自動化</li><li>機器學習應用</li></ul></section><section><h2 class="text-sm font-semibold uppercase tracking-wider text-[var(--muted)]">常用技術</h2><p class="mt-4 leading-7 text-[var(--muted)]">C++、Python、Java、Swift、PyTorch、Docker、GitHub Actions、Linux、PostgreSQL 與 Google Cloud。</p></section><section><h2 class="text-sm font-semibold uppercase tracking-wider text-[var(--muted)]">相關連結</h2><div class="mt-4 flex flex-col items-start gap-2"><a class="text-[var(--accent)]" href="https://github.com/ken6078">GitHub ↗</a><a class="text-[var(--accent)]" href="https://www.linkedin.com/in/kaiweichou/">LinkedIn ↗</a><a class="text-[var(--accent)]" href="mailto:contact@kaiwei.dev">Email ↗</a></div></section></aside>
+  </div>
+</PageLayout>
